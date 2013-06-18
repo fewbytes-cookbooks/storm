@@ -68,9 +68,12 @@ else
 	nimbus = if node.recipe? "storm::nimbus"
 		node
 	else
-		search(:node, "recipes:storm\:\:nimbus AND storm_cluster_name:#{node["storm"]["cluster_name"]} AND chef_environment:#{node.chef_environment}").sort.first
+		nimbus_nodes = search(:node, "recipes:storm\:\:nimbus AND storm_cluster_name:#{node["storm"]["cluster_name"]} AND chef_environment:#{node.chef_environment}")
+		raise RuntimeError, "Nimbus node not found" if nimbus_nodes.empty?
+		nimbus_nodes.sort.first
 	end
 	zk_nodes = search(:node, "zookeeper_cluster_name:#{node["storm"]["zookeeper"]["cluster_name"]} AND chef_environment:#{node.chef_environment}")
+	raise RuntimeError, "No zookeeper nodes nodes found" if zk_nodes.empty?
 end
 
 template ::File.join(node["storm"]["home_dir"], "conf", "storm.yaml") do
