@@ -65,7 +65,11 @@ if Chef::Config[:solo]
 	nimbus = node
 	zk_nodes = [node]
 else
-	nimbus = search(:node, "recipes:storm\:\:nimbus AND storm_cluster_name:#{node["storm"]["cluster_name"]} AND chef_environment:#{node.chef_environment}").sort.first
+	nimbus = if node.recipe? "storm::nimbus"
+		node
+	else
+		search(:node, "recipes:storm\:\:nimbus AND storm_cluster_name:#{node["storm"]["cluster_name"]} AND chef_environment:#{node.chef_environment}").sort.first
+	end
 	zk_nodes = search(:node, "zookeeper_cluster_name:#{node["storm"]["zookeeper"]["cluster_name"]} AND chef_environment:#{node.chef_environment}")
 end
 
