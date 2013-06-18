@@ -68,7 +68,7 @@ else
 	nimbus = if node.recipe? "storm::nimbus"
 		node
 	else
-		nimbus_nodes = search(:node, "recipes:storm\:\:nimbus AND storm_cluster_name:#{node["storm"]["cluster_name"]} AND chef_environment:#{node.chef_environment}")
+		nimbus_nodes = search(:node, "recipes:storm\\:\\:nimbus AND storm_cluster_name:#{node["storm"]["cluster_name"]} AND chef_environment:#{node.chef_environment}")
 		raise RuntimeError, "Nimbus node not found" if nimbus_nodes.empty?
 		nimbus_nodes.sort.first
 	end
