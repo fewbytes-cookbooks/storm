@@ -20,6 +20,7 @@ default['storm']['zookeeper']['root'] = "/storm"
 default['storm']['zookeeper']['session_timeout'] = 20000
 default['storm']['zookeeper']['retry_times'] = 5
 default['storm']['zookeeper']['retry_interval'] = 1000
+default['storm']['zookeeper']['cluster_name'] = "default"
 
 # supervisor attributes
 default['storm']['supervisor']['workers'] = 4

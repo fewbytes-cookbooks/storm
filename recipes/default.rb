@@ -66,7 +66,7 @@ if Chef::Config[:solo]
 	zk_nodes = [node]
 else
 	nimbus = search(:node, "recipes:storm\:\:nimbus AND storm_cluster_name:#{node["storm"]["cluster_name"]} AND chef_environment:#{node.chef_environment}").sort.first
-	zk_nodes = search(:node, "zookeeper_cluster_name:#{node["storm"]["zookeeper_cluster_name"]} AND chef_environment:#{node.chef_environment}")
+	zk_nodes = search(:node, "zookeeper_cluster_name:#{node["storm"]["zookeeper"]["cluster_name"]} AND chef_environment:#{node.chef_environment}")
 end
 
 template ::File.join(node["storm"]["home_dir"], "conf", "storm.yaml") do
