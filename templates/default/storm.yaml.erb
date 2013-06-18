@@ -19,7 +19,7 @@ storm.zookeeper.retry.interval: <%= node[:storm][:zookeeper][:retry_interval] %>
 ### supervisor.* configs are for node supervisors
 supervisor.slots.ports:
 <% (0..(node[:storm][:supervisor][:workers]-1)).each do |i| -%>
-    - <%= 6700+i -%>
+    - <%= 6700+i %>
 <% end -%>
 supervisor.childopts: "<%= node[:storm][:supervisor][:childopts] %>"
 supervisor.worker.start.timeout.secs: <%= node[:storm][:supervisor][:worker_start_timeout] %>
