@@ -72,7 +72,7 @@ else
 		raise RuntimeError, "Nimbus node not found" if nimbus_nodes.empty?
 		nimbus_nodes.sort.first
 	end
-	zk_nodes = search(:node, "zookeeper_cluster_name:#{node["storm"]["zookeeper"]["cluster_name"]} AND chef_environment:#{node.chef_environment}")
+	zk_nodes = search(:node, "zookeeper_cluster_name:#{node["storm"]["zookeeper"]["cluster_name"]} AND chef_environment:#{node.chef_environment}").sort
 	raise RuntimeError, "No zookeeper nodes nodes found" if zk_nodes.empty?
 end
 
