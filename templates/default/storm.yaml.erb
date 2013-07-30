@@ -71,7 +71,7 @@ drpc.request.timeout.secs: <%= node[:storm][:drpc][:request_timeout_secs] %>
 ### transactional.* configs
 transactional.zookeeper.servers:
 <% @zookeeper_nodes.each do |host| -%>
-    - "<%= host %>"
+    - "<%= host[:ipaddress] %>"
 <% end -%>
 transactional.zookeeper.root: "<%= node[:storm][:transactional][:zookeeper][:root] %>"
 transactional.zookeeper.port: <%= node[:storm][:transactional][:zookeeper][:port] %>
