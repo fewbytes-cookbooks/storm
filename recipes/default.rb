@@ -76,7 +76,7 @@ else
 	raise RuntimeError, "No zookeeper nodes nodes found" if zk_nodes.empty?
 end
 
-template ::File.join(node["storm"]["home_dir"], "conf", "storm.yaml") do
+template ::File.join(node["storm"]["conf_dir"], "storm.yaml") do
 	mode 00644
 	variables :zookeeper_nodes => zk_nodes, :nimbus => nimbus
 end
