@@ -70,9 +70,9 @@ else
 	else
 		nimbus_nodes = search(:node, "recipes:storm\\:\\:nimbus AND storm_cluster_name:#{node["storm"]["cluster_name"]} AND chef_environment:#{node.chef_environment}")
 		raise RuntimeError, "Nimbus node not found" if nimbus_nodes.empty?
-		nimbus_nodes.sort.first
+		nimbus_nodes.sort{|n| n.name}.first
 	end
-	zk_nodes = search(:node, "zookeeper_cluster_name:#{node["storm"]["zookeeper"]["cluster_name"]} AND chef_environment:#{node.chef_environment}").sort
+	zk_nodes = search(:node, "zookeeper_cluster_name:#{node["storm"]["zookeeper"]["cluster_name"]} AND chef_environment:#{node.chef_environment}").sort{|n| n.name}
 	raise RuntimeError, "No zookeeper nodes nodes found" if zk_nodes.empty?
 end
 
